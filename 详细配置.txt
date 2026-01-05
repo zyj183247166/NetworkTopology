@@ -1,0 +1,256 @@
+1.Export设备配置
+interface GigabitEthernet0/0/0
+ ip address 10.0.1.1 255.255.255.252
+interface GigabitEthernet0/0/1
+ ip address 100.100.100.2 255.255.255.252
+ip route-static 10.0.2.0 255.255.255.0 10.0.1.2
+snmp-agent
+snmp-agent community write public
+snmp-agent sys-info contact 18627711314
+snmp-agent sys-info location 2th-floor
+snmp-agent sys-info version v2c v3
+snmp-agent target-host trap-hostname xiaojie address 100.100.100.1 udp-port 162 trap-paramsname public
+snmp-agent trap enable
+
+2.FW设备配置
+icmp ttl-exceeded send 
+ip route-static 0.0.0.0 0 10.0.1.1
+firewall zone trust
+ add interface GigabitEthernet1/0/0
+firewall zone untrust
+ add interface GigabitEthernet1/0/1
+dhcp enable
+interface GigabitEthernet1/0/0
+ undo shutdown
+ ip address 10.0.2.1 255.255.255.0
+ service-manage http permit
+ service-manage https permit
+ service-manage ping permit
+ service-manage ssh permit
+ service-manage snmp permit
+ service-manage telnet permit
+ dhcp select interface
+ dhcp server excluded-ip-address 10.0.2.16 10.0.2.17
+ dhcp server static-bind ip-address 10.0.2.2 mac-address 4c1f-cc3d-0a16
+ dhcp server static-bind ip-address 10.0.2.3 mac-address 4c1f-ccf2-150f
+ dhcp server static-bind ip-address 10.0.2.4 mac-address 4c1f-cc82-2a47
+ dhcp server static-bind ip-address 10.0.2.5 mac-address 4c1f-cc38-189e
+ dhcp server static-bind ip-address 10.0.2.6 mac-address 4c1f-cc34-36a0
+ dhcp server static-bind ip-address 10.0.2.7 mac-address 4c1f-cc75-1d5a
+ dhcp server static-bind ip-address 10.0.2.8 mac-address 4c1f-cce1-3a45
+ dhcp server static-bind ip-address 10.0.2.9 mac-address 4c1f-ccc9-5f1a
+ dhcp server static-bind ip-address 10.0.2.10 mac-address 00e0-fcf6-6f80
+ dhcp server static-bind ip-address 10.0.2.11 mac-address 00e0-fc7e-4d20
+ dhcp server static-bind ip-address 10.0.2.12 mac-address 5489-989b-612e
+ dhcp server static-bind ip-address 10.0.2.13 mac-address 5489-9854-7530
+ dhcp server static-bind ip-address 10.0.2.14 mac-address 5489-98e9-02f6
+ dhcp server static-bind ip-address 10.0.2.15 mac-address 5489-985c-757a
+interface GigabitEthernet1/0/1
+ undo shutdown
+ ip address 10.0.1.2 255.255.255.252
+ service-manage http permit
+ service-manage https permit
+ service-manage ping permit
+ service-manage ssh permit
+ service-manage snmp permit
+ service-manage telnet permit
+snmp-agent
+snmp-agent community write publicpublic1Ab
+snmp-agent sys-info contact 18627711314
+snmp-agent sys-info location 2th-floor
+snmp-agent sys-info version v2c v3
+snmp-agent target-host trap address udp-domain 100.100.100.1 params securityname publicpublic1Ab
+snmp-agent trap enable
+security-policy
+ rule name permitany
+  action permit
+
+3.Core设备
+dhcp enable
+interface Vlanif1
+ ip address dhcp-alloc
+int eth-trunk 1
+ mode lacp-static
+ trunkport GigabitEthernet 0/0/17 to 0/0/18
+int eth-trunk 2
+ mode lacp-static
+ trunkport GigabitEthernet 0/0/19 to 0/0/20
+snmp-agent
+snmp-agent community read public
+snmp-agent community write public
+snmp-agent sys-info contact 18627711314
+snmp-agent sys-info location 2th-floor
+snmp-agent sys-info version v2c v3
+snmp-agent target-host trap address udp-domain 100.100.100.1 udp-port 162 params securityname public
+snmp-agent trap enable
+
+
+
+4.ServerSW设备
+dhcp enable
+interface Vlanif1
+ ip address dhcp-alloc
+snmp-agent
+snmp-agent community read public
+snmp-agent community write public
+snmp-agent sys-info contact 18627711314
+snmp-agent sys-info location 2th-floor
+snmp-agent sys-info version v2c v3
+snmp-agent target-host trap address udp-domain 100.100.100.1 udp-port 162 params securityname public
+snmp-agent trap enable
+
+5.AGG1设备
+dhcp enable
+interface Vlanif1
+ ip address dhcp-alloc
+int eth-trunk 1
+ mode lacp-static
+ trunkport GigabitEthernet 0/0/17 to 0/0/18
+int eth-trunk 2
+ mode lacp-static
+ trunkport GigabitEthernet 0/0/23 to 0/0/24
+int eth-trunk 3
+ mode lacp-static
+ trunkport GigabitEthernet 0/0/21 to 0/0/22
+snmp-agent
+snmp-agent community read public
+snmp-agent community write public
+snmp-agent sys-info contact 18627711314
+snmp-agent sys-info location 2th-floor
+snmp-agent sys-info version v2c v3
+snmp-agent target-host trap address udp-domain 100.100.100.1 udp-port 162 params securityname public
+snmp-agent trap enable
+
+6.AGG2设备
+dhcp enable
+interface Vlanif1
+ ip address dhcp-alloc
+int eth-trunk 1
+ mode lacp-static
+ trunkport GigabitEthernet 0/0/19 to 0/0/20
+int eth-trunk 2
+ mode lacp-static
+ trunkport GigabitEthernet 0/0/23 to 0/0/24
+int eth-trunk 3
+ mode lacp-static
+ trunkport GigabitEthernet 0/0/21 to 0/0/22
+snmp-agent
+snmp-agent community read public
+snmp-agent community write public
+snmp-agent sys-info contact 18627711314
+snmp-agent sys-info location 2th-floor
+snmp-agent sys-info version v2c v3
+snmp-agent target-host trap address udp-domain 100.100.100.1 udp-port 162 params securityname public
+snmp-agent trap enable
+
+7.T1-ACC1设备
+dhcp enable
+interface Vlanif1
+ ip address dhcp-alloc
+int eth-trunk 1
+ mode lacp-static
+ trunkport GigabitEthernet 0/0/23 to 0/0/24
+snmp-agent
+snmp-agent community read public
+snmp-agent community write public
+snmp-agent sys-info contact 18627711314
+snmp-agent sys-info location 2th-floor
+snmp-agent sys-info version v2c v3
+snmp-agent target-host trap address udp-domain 100.100.100.1 udp-port 162 params securityname public
+snmp-agent trap enable
+
+8.T1-ACC2设备
+dhcp enable
+interface Vlanif1
+ ip address dhcp-alloc
+int eth-trunk 1
+ mode lacp-static
+ trunkport GigabitEthernet 0/0/23 to 0/0/24
+snmp-agent
+snmp-agent community read public
+snmp-agent community write public
+snmp-agent sys-info contact 18627711314
+snmp-agent sys-info location 2th-floor
+snmp-agent sys-info version v2c v3
+snmp-agent target-host trap address udp-domain 100.100.100.1 udp-port 162 params securityname public
+snmp-agent trap enable
+
+
+9.T2-ACC1设备
+dhcp enable
+interface Vlanif1
+ ip address dhcp-alloc
+int eth-trunk 1
+ mode lacp-static
+ trunkport GigabitEthernet 0/0/23 to 0/0/24
+snmp-agent
+snmp-agent community read public
+snmp-agent community write public
+snmp-agent sys-info contact 18627711314
+snmp-agent sys-info location 2th-floor
+snmp-agent sys-info version v2c v3
+snmp-agent target-host trap address udp-domain 100.100.100.1 udp-port 162 params securityname public
+snmp-agent trap enable
+
+
+10.T2-ACC2设备
+dhcp enable
+interface Vlanif1
+ ip address dhcp-alloc
+int eth-trunk 1
+ mode lacp-static
+ trunkport GigabitEthernet 0/0/23 to 0/0/24
+snmp-agent
+snmp-agent community read public
+snmp-agent community write public
+snmp-agent sys-info contact 18627711314
+snmp-agent sys-info location 2th-floor
+snmp-agent sys-info version v2c v3
+snmp-agent target-host trap address udp-domain 100.100.100.1 udp-port 162 params securityname public
+snmp-agent trap enable
+
+
+
+11.T1_AP1和T2_AP2设备保持默认配置即可
+
+12.AC设备
+vlan 100
+interface Vlanif100
+ ip address 10.0.2.16 255.255.255.0
+interface GigabitEthernet0/0/1
+ port link-type access
+ port default vlan 100
+capwap source interface vlanif100
+wlan
+ security-profile name guest
+  security wpa-wpa2 psk pass-phrase Huawei@123 aes
+ ssid-profile name guest
+  ssid Guest_001
+ vap-profile name guest
+  vap-profile name guest
+  service-vlan vlan-id 1
+  ssid-profile guest
+  security-profile guest
+ ap-group name X
+  radio 0
+   vap-profile guest wlan 2
+  radio 1
+   vap-profile guest wlan 2
+  radio 2
+   vap-profile guest wlan 2
+ ap-id 0 type-id 69 ap-mac 00e0-fcf6-6f80 ap-sn 2102354483104127CE17
+  ap-name T1_AP1
+  ap-group X
+ ap-id 1 type-id 69 ap-mac 00e0-fc7e-4d20 ap-sn 210235448310D0687C76
+  ap-name T2_AP1
+  ap-group X
+snmp-agent
+snmp-agent community read publicpublic1Ab
+snmp-agent community write publicpublic1Ab
+snmp-agent sys-info contact 18627711314
+snmp-agent sys-info location 2th-floor
+snmp-agent sys-info version v2c v3
+snmp-agent target-host trap-hostname xiaojie address 100.100.100.1 udp-port 162 trap-paramsname publicpublic1Ab
+snmp-agent trap enable
+y
+
