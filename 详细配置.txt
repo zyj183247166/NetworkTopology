@@ -9,7 +9,7 @@ snmp-agent community write public
 snmp-agent sys-info contact 18627711314
 snmp-agent sys-info location 2th-floor
 snmp-agent sys-info version v2c v3
-snmp-agent target-host trap-hostname xiaojie address 100.100.100.1 udp-port 162 trap-paramsname public
+snmp-agent target-host trap-hostname xiaojie address 100.100.100.1 udp-port 162 trap-paramsname public v2c
 snmp-agent trap enable
 
 2.FW设备配置
@@ -59,7 +59,7 @@ snmp-agent community write publicpublic1Ab
 snmp-agent sys-info contact 18627711314
 snmp-agent sys-info location 2th-floor
 snmp-agent sys-info version v2c v3
-snmp-agent target-host trap address udp-domain 100.100.100.1 params securityname publicpublic1Ab
+snmp-agent target-host trap address udp-domain 100.100.100.1 params securityname publicpublic1Ab  v2c
 snmp-agent trap enable
 security-policy
  rule name permitany
@@ -81,7 +81,7 @@ snmp-agent community write public
 snmp-agent sys-info contact 18627711314
 snmp-agent sys-info location 2th-floor
 snmp-agent sys-info version v2c v3
-snmp-agent target-host trap address udp-domain 100.100.100.1 udp-port 162 params securityname public
+snmp-agent target-host trap address udp-domain 100.100.100.1 udp-port 162 params securityname public  v2c
 snmp-agent trap enable
 
 
@@ -96,7 +96,7 @@ snmp-agent community write public
 snmp-agent sys-info contact 18627711314
 snmp-agent sys-info location 2th-floor
 snmp-agent sys-info version v2c v3
-snmp-agent target-host trap address udp-domain 100.100.100.1 udp-port 162 params securityname public
+snmp-agent target-host trap address udp-domain 100.100.100.1 udp-port 162 params securityname public  v2c
 snmp-agent trap enable
 
 5.AGG1设备
@@ -118,7 +118,7 @@ snmp-agent community write public
 snmp-agent sys-info contact 18627711314
 snmp-agent sys-info location 2th-floor
 snmp-agent sys-info version v2c v3
-snmp-agent target-host trap address udp-domain 100.100.100.1 udp-port 162 params securityname public
+snmp-agent target-host trap address udp-domain 100.100.100.1 udp-port 162 params securityname public  v2c
 snmp-agent trap enable
 
 6.AGG2设备
@@ -140,7 +140,7 @@ snmp-agent community write public
 snmp-agent sys-info contact 18627711314
 snmp-agent sys-info location 2th-floor
 snmp-agent sys-info version v2c v3
-snmp-agent target-host trap address udp-domain 100.100.100.1 udp-port 162 params securityname public
+snmp-agent target-host trap address udp-domain 100.100.100.1 udp-port 162 params securityname public  v2c
 snmp-agent trap enable
 
 7.T1-ACC1设备
@@ -156,7 +156,7 @@ snmp-agent community write public
 snmp-agent sys-info contact 18627711314
 snmp-agent sys-info location 2th-floor
 snmp-agent sys-info version v2c v3
-snmp-agent target-host trap address udp-domain 100.100.100.1 udp-port 162 params securityname public
+snmp-agent target-host trap address udp-domain 100.100.100.1 udp-port 162 params securityname public  v2c
 snmp-agent trap enable
 
 8.T1-ACC2设备
@@ -172,7 +172,7 @@ snmp-agent community write public
 snmp-agent sys-info contact 18627711314
 snmp-agent sys-info location 2th-floor
 snmp-agent sys-info version v2c v3
-snmp-agent target-host trap address udp-domain 100.100.100.1 udp-port 162 params securityname public
+snmp-agent target-host trap address udp-domain 100.100.100.1 udp-port 162 params securityname public  v2c
 snmp-agent trap enable
 
 
@@ -189,7 +189,7 @@ snmp-agent community write public
 snmp-agent sys-info contact 18627711314
 snmp-agent sys-info location 2th-floor
 snmp-agent sys-info version v2c v3
-snmp-agent target-host trap address udp-domain 100.100.100.1 udp-port 162 params securityname public
+snmp-agent target-host trap address udp-domain 100.100.100.1 udp-port 162 params securityname public  v2c
 snmp-agent trap enable
 
 
@@ -206,7 +206,7 @@ snmp-agent community write public
 snmp-agent sys-info contact 18627711314
 snmp-agent sys-info location 2th-floor
 snmp-agent sys-info version v2c v3
-snmp-agent target-host trap address udp-domain 100.100.100.1 udp-port 162 params securityname public
+snmp-agent target-host trap address udp-domain 100.100.100.1 udp-port 162 params securityname public  v2c
 snmp-agent trap enable
 
 
@@ -250,7 +250,7 @@ snmp-agent community write publicpublic1Ab
 snmp-agent sys-info contact 18627711314
 snmp-agent sys-info location 2th-floor
 snmp-agent sys-info version v2c v3
-snmp-agent target-host trap-hostname xiaojie address 100.100.100.1 udp-port 162 trap-paramsname publicpublic1Ab
+snmp-agent target-host trap-hostname xiaojie address 100.100.100.1 udp-port 162 trap-paramsname publicpublic1Ab  v2c
 snmp-agent trap enable
 y
 
